@@ -13,7 +13,6 @@ class ViewController: UIViewController {
 
     private lazy var monitor: BeaconMonitor = {
         let monitor = BeaconMonitorImpl()
-        monitor.delegate = self
         return monitor
     }()
     
