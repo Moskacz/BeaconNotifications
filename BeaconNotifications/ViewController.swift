@@ -10,15 +10,13 @@ import UIKit
 import UserNotifications
 
 class ViewController: UIViewController {
-
-    private lazy var monitor: BeaconMonitor = {
-        let monitor = BeaconMonitorImpl()
-        return monitor
+    
+    private lazy var scheduler: BeaconRegionNotificationScheduler = {
+        return BeaconRegionNotificationScheduler()
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let uuid = UUID(uuidString: "B9407F30-F5F8-466E-AFF9-25556B57FE6D")!
-        monitor.startMonitoringBeacon(uuid: uuid, identifier: "mint")
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        scheduler.startMonitoringBeacons()
     }
 }

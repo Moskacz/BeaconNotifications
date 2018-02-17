@@ -14,7 +14,7 @@ protocol BeaconMonitorDelegate: class {
     func beaconMonitorDidLeaveRegion(monitor: BeaconMonitor)
 }
 
-protocol BeaconMonitor {
+protocol BeaconMonitor: class {
     var delegate: BeaconMonitorDelegate? { get set }
     func startMonitoringBeacon(uuid: UUID, identifier: String)
     func stopMonitoring()
