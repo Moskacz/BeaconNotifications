@@ -20,6 +20,5 @@ class ViewController: UIViewController {
         monitor.startMonitoringBeacon(uuid: uuid, identifier: "mint")
     }
 
-
 }
 
