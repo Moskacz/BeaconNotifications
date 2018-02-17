@@ -9,13 +9,20 @@
 import Foundation
 import CoreLocation
 
+protocol BeaconMonitorDelegate: class {
+    func beaconMonitorDidEnteredRegion(monitor: BeaconMonitor)
+    func beaconMonitorDidLeaveRegion(monitor: BeaconMonitor)
+}
+
 protocol BeaconMonitor {
+    var delegate: BeaconMonitorDelegate? { get set }
     func startMonitoringBeacon(uuid: UUID, identifier: String)
     func stopMonitoring()
 }
 
 class BeaconMonitorImpl: NSObject, BeaconMonitor {
     
+    public weak var delegate: BeaconMonitorDelegate?
     private let manager: CLLocationManager
     
     init(manager: CLLocationManager = CLLocationManager()) {
@@ -38,10 +45,10 @@ class BeaconMonitorImpl: NSObject, BeaconMonitor {
 extension BeaconMonitorImpl: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        print("entered region")
+        delegate?.beaconMonitorDidEnteredRegion(monitor: self)
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        print("exited region")
+        delegate?.beaconMonitorDidLeaveRegion(monitor: self)
     }
 }
