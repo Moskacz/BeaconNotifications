@@ -17,13 +17,14 @@ protocol BeaconMonitorDelegate: class {
 protocol BeaconMonitor: class {
     var delegate: BeaconMonitorDelegate? { get set }
     func startMonitoringBeacon(uuid: UUID, identifier: String)
-    func stopMonitoring()
+    func stopMonitoringCurrenlyMonitoredRegion()
 }
 
 class BeaconMonitorImpl: NSObject, BeaconMonitor {
     
     public weak var delegate: BeaconMonitorDelegate?
     private let manager: CLLocationManager
+    private var monitoredRegion: CLBeaconRegion?
     
     init(manager: CLLocationManager = CLLocationManager()) {
         self.manager = manager
@@ -33,12 +34,17 @@ class BeaconMonitorImpl: NSObject, BeaconMonitor {
     
     func startMonitoringBeacon(uuid: UUID, identifier: String) {
         let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: identifier)
+        beaconRegion.notifyOnExit = true
+        beaconRegion.notifyOnEntry = true
+        beaconRegion.notifyEntryStateOnDisplay = true
         manager.startMonitoring(for: beaconRegion)
+        self.monitoredRegion = beaconRegion
         print("started monitoring")
     }
     
-    func stopMonitoring() {
-        
+    func stopMonitoringCurrenlyMonitoredRegion() {
+        guard let region = monitoredRegion else { return }
+        manager.stopMonitoring(for: region)
     }
 }
 

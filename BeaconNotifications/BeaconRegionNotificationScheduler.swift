@@ -32,6 +32,6 @@ extension BeaconRegionNotificationScheduler: BeaconMonitorDelegate {
     }
     
     func beaconMonitorDidLeaveRegion(monitor: BeaconMonitor) {
-    
+        notificationManager.scheduleNotification()
     }
 }
