@@ -13,7 +13,8 @@ public class CoreDataStack {
     
     init(completion: @escaping (NSPersistentStoreDescription, Error?) -> Void) {
         let container = NSPersistentContainer(name: "DataModel")
-        container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: FileManager.default.appGroupURL)]
+        
+        container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: FileManager.default.sharedDatabaseURL)]
         container.loadPersistentStores { (description, error) in
             completion(description, error)
         }

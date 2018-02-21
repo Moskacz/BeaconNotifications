@@ -9,5 +9,5 @@
 import Foundation
 
 class Constants {
-    public static let appGroupIdentifier = "com.beacon.notifications"
+    public static let appGroupIdentifier = "group.beacon.notifications"
 }

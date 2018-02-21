@@ -13,4 +13,8 @@ extension FileManager {
     public var appGroupURL: URL {
         return containerURL(forSecurityApplicationGroupIdentifier: Constants.appGroupIdentifier)!
     }
+    
+    public var sharedDatabaseURL: URL {
+        return appGroupURL.appendingPathComponent("Database.sqlite")
+    }
 }
