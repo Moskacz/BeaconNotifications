@@ -13,6 +13,9 @@
 		353389A2202F8B03003CDE45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 353389A1202F8B03003CDE45 /* Assets.xcassets */; };
 		353389A5202F8B03003CDE45 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 353389A3202F8B03003CDE45 /* LaunchScreen.storyboard */; };
 		353389B0202F8B03003CDE45 /* BeaconNotificationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353389AF202F8B03003CDE45 /* BeaconNotificationsTests.swift */; };
+		354BE1D4203DE1A800355A6F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354BE1D3203DE1A800355A6F /* CoreDataStack.swift */; };
+		354BE1D6203DE26D00355A6F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354BE1D5203DE26D00355A6F /* Constants.swift */; };
+		354BE1D8203DE37D00355A6F /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354BE1D7203DE37D00355A6F /* FileManager+Extensions.swift */; };
 		3557ED3D203856EB008DEB28 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3557ED3C203856EB008DEB28 /* NotificationManager.swift */; };
 		3557ED3F20385B9C008DEB28 /* BeaconRegionNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3557ED3E20385B9C008DEB28 /* BeaconRegionNotificationScheduler.swift */; };
 		35C3C5DB20304B95004B1139 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C3C5DA20304B95004B1139 /* UserNotifications.framework */; };
@@ -67,6 +70,9 @@
 		353389B1202F8B03003CDE45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		354BE1D0203DE13200355A6F /* BeaconNotifications.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeaconNotifications.entitlements; sourceTree = "<group>"; };
 		354BE1D1203DE14A00355A6F /* NotificationContentExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationContentExtension.entitlements; sourceTree = "<group>"; };
+		354BE1D3203DE1A800355A6F /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		354BE1D5203DE26D00355A6F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		354BE1D7203DE37D00355A6F /* FileManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
 		3557ED3C203856EB008DEB28 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		3557ED3E20385B9C008DEB28 /* BeaconRegionNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconRegionNotificationScheduler.swift; sourceTree = "<group>"; };
 		35C3C5D820304B95004B1139 /* NotificationContentExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationContentExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +135,7 @@
 		35338999202F8B03003CDE45 /* BeaconNotifications */ = {
 			isa = PBXGroup;
 			children = (
+				354BE1D2203DE19A00355A6F /* CoreData */,
 				354BE1D0203DE13200355A6F /* BeaconNotifications.entitlements */,
 				3533899A202F8B03003CDE45 /* AppDelegate.swift */,
 				3533899C202F8B03003CDE45 /* ViewController.swift */,
@@ -139,6 +146,8 @@
 				35F186252030381700C68085 /* BeaconMonitor.swift */,
 				3557ED3C203856EB008DEB28 /* NotificationManager.swift */,
 				3557ED3E20385B9C008DEB28 /* BeaconRegionNotificationScheduler.swift */,
+				354BE1D5203DE26D00355A6F /* Constants.swift */,
+				354BE1D7203DE37D00355A6F /* FileManager+Extensions.swift */,
 			);
 			path = BeaconNotifications;
 			sourceTree = "<group>";
@@ -150,6 +159,14 @@
 				353389B1202F8B03003CDE45 /* Info.plist */,
 			);
 			path = BeaconNotificationsTests;
+			sourceTree = "<group>";
+		};
+		354BE1D2203DE19A00355A6F /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				354BE1D3203DE1A800355A6F /* CoreDataStack.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		35C3C5D920304B95004B1139 /* Frameworks */ = {
@@ -320,6 +337,9 @@
 				3533899D202F8B03003CDE45 /* ViewController.swift in Sources */,
 				35F186262030381700C68085 /* BeaconMonitor.swift in Sources */,
 				3557ED3F20385B9C008DEB28 /* BeaconRegionNotificationScheduler.swift in Sources */,
+				354BE1D4203DE1A800355A6F /* CoreDataStack.swift in Sources */,
+				354BE1D6203DE26D00355A6F /* Constants.swift in Sources */,
+				354BE1D8203DE37D00355A6F /* FileManager+Extensions.swift in Sources */,
 				3557ED3D203856EB008DEB28 /* NotificationManager.swift in Sources */,
 				3533899B202F8B03003CDE45 /* AppDelegate.swift in Sources */,
 			);
