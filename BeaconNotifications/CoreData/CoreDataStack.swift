@@ -11,13 +11,19 @@ import CoreData
 
 public class CoreDataStack {
     
+    private let container: NSPersistentContainer
+    
     init(completion: @escaping (NSPersistentStoreDescription, Error?) -> Void) {
-        let container = NSPersistentContainer(name: "DataModel")
+        self.container = NSPersistentContainer(name: "DataModel")
         
         container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: FileManager.default.sharedDatabaseURL)]
         container.loadPersistentStores { (description, error) in
             completion(description, error)
         }
+    }
+    
+    var viewContext: NSManagedObjectContext {
+        return container.viewContext
     }
     
 }

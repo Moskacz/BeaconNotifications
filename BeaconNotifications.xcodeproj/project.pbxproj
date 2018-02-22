@@ -21,6 +21,7 @@
 		354BE1DF203DE46100355A6F /* Image+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354BE1DD203DE46100355A6F /* Image+CoreDataProperties.swift */; };
 		354BE1E0203DE46500355A6F /* Image+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354BE1DD203DE46100355A6F /* Image+CoreDataProperties.swift */; };
 		354BE1E1203DE46E00355A6F /* Image+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354BE1DC203DE46100355A6F /* Image+CoreDataClass.swift */; };
+		354BE1E3203F347400355A6F /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354BE1E2203F347400355A6F /* ImageRepository.swift */; };
 		3557ED3D203856EB008DEB28 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3557ED3C203856EB008DEB28 /* NotificationManager.swift */; };
 		3557ED3F20385B9C008DEB28 /* BeaconRegionNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3557ED3E20385B9C008DEB28 /* BeaconRegionNotificationScheduler.swift */; };
 		35C3C5DB20304B95004B1139 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C3C5DA20304B95004B1139 /* UserNotifications.framework */; };
@@ -81,6 +82,7 @@
 		354BE1DA203DE43000355A6F /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		354BE1DC203DE46100355A6F /* Image+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataClass.swift"; sourceTree = "<group>"; };
 		354BE1DD203DE46100355A6F /* Image+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		354BE1E2203F347400355A6F /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
 		3557ED3C203856EB008DEB28 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		3557ED3E20385B9C008DEB28 /* BeaconRegionNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconRegionNotificationScheduler.swift; sourceTree = "<group>"; };
 		35C3C5D820304B95004B1139 /* NotificationContentExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationContentExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +178,7 @@
 				354BE1DD203DE46100355A6F /* Image+CoreDataProperties.swift */,
 				354BE1D3203DE1A800355A6F /* CoreDataStack.swift */,
 				354BE1D9203DE43000355A6F /* DataModel.xcdatamodeld */,
+				354BE1E2203F347400355A6F /* ImageRepository.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				354BE1D6203DE26D00355A6F /* Constants.swift in Sources */,
 				354BE1D8203DE37D00355A6F /* FileManager+Extensions.swift in Sources */,
 				354BE1DB203DE43000355A6F /* DataModel.xcdatamodeld in Sources */,
+				354BE1E3203F347400355A6F /* ImageRepository.swift in Sources */,
 				3557ED3D203856EB008DEB28 /* NotificationManager.swift in Sources */,
 				3533899B202F8B03003CDE45 /* AppDelegate.swift in Sources */,
 				354BE1DE203DE46100355A6F /* Image+CoreDataClass.swift in Sources */,

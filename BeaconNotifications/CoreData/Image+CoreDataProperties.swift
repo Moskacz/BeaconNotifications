@@ -2,7 +2,7 @@
 //  Image+CoreDataProperties.swift
 //  BeaconNotifications
 //
-//  Created by Michal Moskala on 21.02.2018.
+//  Created by Michal Moskala on 22.02.2018.
 //  Copyright © 2018 Michal Moskala. All rights reserved.
 //
 //
@@ -17,6 +17,7 @@ extension Image {
         return NSFetchRequest<Image>(entityName: "Image")
     }
 
-    @NSManaged public var imageData: NSDate?
+    @NSManaged public var imageData: NSData?
+    @NSManaged public var order: Int32
 
 }
