@@ -25,6 +25,11 @@ class ViewController: UIViewController {
     private func setupFRC() {
         frc = imageRepository?.frc
         frc?.delegate = self
+        refreshImage()
+    }
+    
+    private func refreshImage() {
+        imageView?.image = frc?.fetchedObjects?.first?.image
     }
 }
 
@@ -64,6 +69,6 @@ extension ViewController: UINavigationControllerDelegate {}
 // MARK: NSFetchedResultsControllerDelegate
 extension ViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        imageView?.image = frc?.fetchedObjects?.first?.image
+        refreshImage()
     }
 }

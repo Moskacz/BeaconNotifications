@@ -26,4 +26,12 @@ public class CoreDataStack {
         return container.viewContext
     }
     
+    func saveViewContextIfNeeded() {
+        guard viewContext.hasChanges else { return }
+        do {
+            try viewContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }

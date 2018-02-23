@@ -23,7 +23,7 @@ public class ImageRepository {
         do {
             try resultsController.performFetch()
         } catch {
-            
+            print(error.localizedDescription)
         }
         return resultsController
     }()
