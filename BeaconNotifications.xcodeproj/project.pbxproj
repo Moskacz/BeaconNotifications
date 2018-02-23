@@ -24,6 +24,8 @@
 		354BE1E3203F347400355A6F /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354BE1E2203F347400355A6F /* ImageRepository.swift */; };
 		3557ED3D203856EB008DEB28 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3557ED3C203856EB008DEB28 /* NotificationManager.swift */; };
 		3557ED3F20385B9C008DEB28 /* BeaconRegionNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3557ED3E20385B9C008DEB28 /* BeaconRegionNotificationScheduler.swift */; };
+		3558B9A5204082F4006B1C38 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3558B9A4204082F4006B1C38 /* TabBarController.swift */; };
+		3558B9A720408339006B1C38 /* BeaconListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3558B9A620408339006B1C38 /* BeaconListViewController.swift */; };
 		35C3C5DB20304B95004B1139 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C3C5DA20304B95004B1139 /* UserNotifications.framework */; };
 		35C3C5DD20304B95004B1139 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C3C5DC20304B95004B1139 /* UserNotificationsUI.framework */; };
 		35C3C5E020304B95004B1139 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C3C5DF20304B95004B1139 /* NotificationViewController.swift */; };
@@ -85,6 +87,8 @@
 		354BE1E2203F347400355A6F /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
 		3557ED3C203856EB008DEB28 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		3557ED3E20385B9C008DEB28 /* BeaconRegionNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconRegionNotificationScheduler.swift; sourceTree = "<group>"; };
+		3558B9A4204082F4006B1C38 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		3558B9A620408339006B1C38 /* BeaconListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconListViewController.swift; sourceTree = "<group>"; };
 		35C3C5D820304B95004B1139 /* NotificationContentExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationContentExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		35C3C5DA20304B95004B1139 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		35C3C5DC20304B95004B1139 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
@@ -158,6 +162,8 @@
 				3557ED3E20385B9C008DEB28 /* BeaconRegionNotificationScheduler.swift */,
 				354BE1D5203DE26D00355A6F /* Constants.swift */,
 				354BE1D7203DE37D00355A6F /* FileManager+Extensions.swift */,
+				3558B9A4204082F4006B1C38 /* TabBarController.swift */,
+				3558B9A620408339006B1C38 /* BeaconListViewController.swift */,
 			);
 			path = BeaconNotifications;
 			sourceTree = "<group>";
@@ -349,6 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3533899D202F8B03003CDE45 /* ViewController.swift in Sources */,
+				3558B9A5204082F4006B1C38 /* TabBarController.swift in Sources */,
 				35F186262030381700C68085 /* BeaconMonitor.swift in Sources */,
 				3557ED3F20385B9C008DEB28 /* BeaconRegionNotificationScheduler.swift in Sources */,
 				354BE1D4203DE1A800355A6F /* CoreDataStack.swift in Sources */,
@@ -357,6 +364,7 @@
 				354BE1DB203DE43000355A6F /* DataModel.xcdatamodeld in Sources */,
 				354BE1E3203F347400355A6F /* ImageRepository.swift in Sources */,
 				3557ED3D203856EB008DEB28 /* NotificationManager.swift in Sources */,
+				3558B9A720408339006B1C38 /* BeaconListViewController.swift in Sources */,
 				3533899B202F8B03003CDE45 /* AppDelegate.swift in Sources */,
 				354BE1DE203DE46100355A6F /* Image+CoreDataClass.swift in Sources */,
 				354BE1DF203DE46100355A6F /* Image+CoreDataProperties.swift in Sources */,
