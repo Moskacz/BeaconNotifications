@@ -8,20 +8,27 @@
 
 import UIKit
 import UserNotifications
+import CoreData
 
 class ViewController: UIViewController {
     
-    private lazy var scheduler: BeaconRegionNotificationScheduler = {
-        return BeaconRegionNotificationScheduler()
-    }()
+    var imageRepository: ImageRepository?
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        scheduler.startMonitoringBeacons()
+    @IBOutlet private weak var imageView: UIImageView?
+    private var frc: NSFetchedResultsController<Image>?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupFRC()
+    }
+    
+    private func setupFRC() {
+        frc = imageRepository?.frc
+        frc?.delegate = self
     }
 }
 
-// MARK: UI Actions
+// MARK: UIImagePickerDelegate
 extension ViewController {
     
     @IBAction func chooseImageTapped(sender: UIButton) {
@@ -35,16 +42,28 @@ extension ViewController {
 
 extension ViewController: UIImagePickerControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
+        dismissModal()
     }
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : Any]) {
+        dismissModal()
         guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
             return
         }
-        
+        imageRepository?.save(image: image)
+    }
+    
+    private func dismissModal() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
 extension ViewController: UINavigationControllerDelegate {}
+
+// MARK: NSFetchedResultsControllerDelegate
+extension ViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        imageView?.image = frc?.fetchedObjects?.first?.image
+    }
+}

@@ -12,13 +12,17 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var coreDataStack: CoreDataStack?
+    
+    private lazy var imageRepository: ImageRepository = {
+        let stack = CoreDataStack(completion: { (description, error) in
+            
+        })
+        return ImageRepository(stack: stack)
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        coreDataStack = CoreDataStack(completion: { (storeDescription, loadingError) in
-            print(storeDescription)
-            print(loadingError?.localizedDescription)
-        })
+        let tabBarController = window!.rootViewController as! TabBarController
+        tabBarController.qrCodeViewController.imageRepository = imageRepository
         return true
     }
 

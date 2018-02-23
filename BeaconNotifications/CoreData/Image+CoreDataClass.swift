@@ -9,7 +9,12 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 public class Image: NSManagedObject {
 
+    public var image: UIImage? {
+        guard let data = imageData as Data? else { return nil }
+        return UIImage(data: data)
+    }
 }

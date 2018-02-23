@@ -57,6 +57,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="QRCode" id="Cel-th-Zwn"/>
+                    <connections>
+                        <outlet property="imageView" destination="sUT-Dp-7aO" id="19o-WX-cco"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -65,7 +68,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Nuz-id-hXP">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="wxv-LF-dzz" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="wxv-LF-dzz" customClass="TabBarController" customModule="BeaconNotifications" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Pr4-UR-RmM">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
