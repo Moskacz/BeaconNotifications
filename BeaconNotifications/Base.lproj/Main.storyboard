@@ -88,10 +88,29 @@
                     <view key="view" contentMode="scaleToFill" id="OMC-NA-PIT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XOD-ad-lWT">
+                                <rect key="frame" x="0.0" y="120" width="375" height="498"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="VUK-Fm-ECd" id="Aq4-oy-qVx"/>
+                                    <outlet property="delegate" destination="VUK-Fm-ECd" id="U8g-XA-22i"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="XOD-ad-lWT" firstAttribute="top" secondItem="KIG-ME-pf5" secondAttribute="top" constant="100" id="GB3-RN-YWn"/>
+                            <constraint firstItem="KIG-ME-pf5" firstAttribute="trailing" secondItem="XOD-ad-lWT" secondAttribute="trailing" id="clt-5o-7ja"/>
+                            <constraint firstItem="KIG-ME-pf5" firstAttribute="bottom" secondItem="XOD-ad-lWT" secondAttribute="bottom" id="sBn-An-mS6"/>
+                            <constraint firstItem="XOD-ad-lWT" firstAttribute="leading" secondItem="KIG-ME-pf5" secondAttribute="leading" id="zr9-Gi-JHz"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="KIG-ME-pf5"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Beacons" id="i6f-BA-cds"/>
+                    <connections>
+                        <outlet property="tableView" destination="XOD-ad-lWT" id="LOk-7M-iF2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JuK-IK-3hv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
