@@ -27,12 +27,12 @@ class BeaconRegionRepository {
         self.stack = stack
     }
     
-    func saveRegion(uuid: UUID, identifier: String, minor: Int16 = 0, major: Int16 = 0) {
+    func addRegion(uuid: UUID, identifier: String, minor: Int16?, major: Int16?) {
         let beaconRegion = BeaconRegion(context: stack.viewContext)
         beaconRegion.uuid = uuid
         beaconRegion.beaconId = identifier
-        beaconRegion.minorValue = minor
-        beaconRegion.majorValue = major
+        beaconRegion.minorValue = minor ?? -1
+        beaconRegion.majorValue = major ?? -1
     }
     
 }
