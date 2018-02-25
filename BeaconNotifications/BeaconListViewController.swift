@@ -10,11 +10,12 @@ import UIKit
 import CoreData
 
 class BeaconListViewController: UIViewController {
-    
-    var frc: NSFetchedResultsController<BeaconRegion>?
+
+    var repository: BeaconRegionRepository?
     
     @IBOutlet private weak var tableView: UITableView?
     private let cellReuseId = "beaconCell"
+    private var frc: NSFetchedResultsController<BeaconRegion>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,11 +24,19 @@ class BeaconListViewController: UIViewController {
     }
     
     private func setupFRC() {
+        frc = repository?.frc
         frc?.delegate = self
     }
     
     private func setupTableView() {
         tableView?.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let addBeaconVC = segue.destination as? AddBeaconRegionViewController, let repo = repository {
+            addBeaconVC.viewModel = AddBeaconRegionViewModel(repository: repo)
+        }
     }
 }
 

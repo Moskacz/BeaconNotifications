@@ -10,4 +10,5 @@ import Foundation
 
 class Constants {
     public static let appGroupIdentifier = "group.beacon.notifications"
+    public static let showAddBeaconRegionVCSegueId = "ShowAddBeaconRegionViewController"
 }

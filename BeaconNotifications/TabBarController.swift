@@ -15,6 +15,7 @@ class TabBarController: UITabBarController {
     }
     
     var beaconsViewController: BeaconListViewController {
-        return viewControllers![1] as! BeaconListViewController
+        let navController = viewControllers![1] as! UINavigationController
+        return navController.viewControllers[0] as! BeaconListViewController
     }
 }

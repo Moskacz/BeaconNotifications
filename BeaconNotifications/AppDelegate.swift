@@ -22,10 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var imageRepository: ImageRepository = {
         return ImageRepository(stack: stack)
     }()
+    
+    private lazy var beaconRepository: BeaconRegionRepository = {
+        return BeaconRegionRepository(stack: stack)
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let tabBarController = window!.rootViewController as! TabBarController
         tabBarController.qrCodeViewController.imageRepository = imageRepository
+        tabBarController.beaconsViewController.repository = beaconRepository
         return true
     }
 

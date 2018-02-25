@@ -110,7 +110,7 @@
                     <navigationItem key="navigationItem" id="c5I-hv-EBA">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="07j-Ff-pkH">
                             <connections>
-                                <segue destination="7tG-tY-2vM" kind="show" id="gMU-Mk-Hsw"/>
+                                <segue destination="7tG-tY-2vM" kind="show" identifier="ShowAddBeaconRegionViewController" id="gMU-Mk-Hsw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -131,35 +131,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1EP-BB-z3X">
-                                <rect key="frame" x="16" y="80" width="343" height="200"/>
+                                <rect key="frame" x="16" y="80" width="343" height="250"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="UUID (required)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9cK-za-tOZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Identifier (required)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BLu-Tq-j6K">
-                                        <rect key="frame" x="0.0" y="52" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="51.5" width="343" height="43.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="minor (optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ruc-M3-xru">
-                                        <rect key="frame" x="0.0" y="104" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="103" width="343" height="44"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="major (optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xGn-W0-9zz">
-                                        <rect key="frame" x="0.0" y="156" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="155" width="343" height="43.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czW-hV-PTe">
+                                        <rect key="frame" x="0.0" y="206.5" width="343" height="43.5"/>
+                                        <color key="backgroundColor" red="0.31672879549999999" green="0.80381719559999998" blue="0.19774479249999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonTappedWithSender:" destination="7tG-tY-2vM" eventType="touchUpInside" id="Jpi-as-HSn"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="YAc-up-8f1"/>
+                                    <constraint firstAttribute="height" constant="250" id="YAc-up-8f1"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -171,6 +181,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KMk-TC-Aha"/>
                     </view>
+                    <connections>
+                        <outlet property="idField" destination="BLu-Tq-j6K" id="Yo3-iF-3m6"/>
+                        <outlet property="majorValueField" destination="xGn-W0-9zz" id="bDz-zV-TD0"/>
+                        <outlet property="minorValueField" destination="ruc-M3-xru" id="FJ8-on-dhj"/>
+                        <outlet property="uuidField" destination="9cK-za-tOZ" id="L1I-AC-dLq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iVB-se-WlC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
