@@ -20,6 +20,12 @@ class BeaconRegionRepository {
                                                            managedObjectContext: stack.viewContext,
                                                            sectionNameKeyPath: nil,
                                                            cacheName: nil)
+        do {
+            try resultsController.performFetch()
+        } catch {
+            print(error.localizedDescription)
+        }
+
         return resultsController
     }()
     

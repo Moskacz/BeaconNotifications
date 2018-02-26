@@ -24,6 +24,7 @@ class AddBeaconRegionViewController: UIViewController {
                                      identifier: idField?.text,
                                      major: majorValueField?.text,
                                      minor: minorValueField?.text)
+            navigationController?.popViewController(animated: true)
         } catch {
             guard let validationError = error as? BeaconRegionValidationError else {
                 return

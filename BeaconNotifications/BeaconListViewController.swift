@@ -21,6 +21,7 @@ class BeaconListViewController: UIViewController {
         super.viewDidLoad()
         setupFRC()
         setupTableView()
+        tableView?.reloadData()
     }
     
     private func setupFRC() {
@@ -29,7 +30,8 @@ class BeaconListViewController: UIViewController {
     }
     
     private func setupTableView() {
-        tableView?.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
+        tableView?.rowHeight = UITableViewAutomaticDimension
+        tableView?.estimatedRowHeight = 60
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -50,9 +52,15 @@ extension BeaconListViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId)!
         let region = frc!.object(at: indexPath)
         cell.textLabel?.text = [region.beaconId, region.uuid?.uuidString].flatMap { $0 }.joined(separator: " ")
+        cell.textLabel?.numberOfLines = 1
+        cell.textLabel?.adjustsFontSizeToFitWidth = true
+        cell.textLabel?.minimumScaleFactor = 0.5
+        cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
+        cell.detailTextLabel?.minimumScaleFactor = 0.5
+        cell.detailTextLabel?.numberOfLines = 1
         let detailsTextComponents = [("major", region.majorValue), ("minor", region.minorValue)]
         cell.detailTextLabel?.text = detailsTextComponents
-            .filter { $0.1 != 0 }
+            .filter { $0.1 != -1 }
             .map { return "\($0.0): \($0.1)"}
             .joined(separator: ", ")
         return cell
