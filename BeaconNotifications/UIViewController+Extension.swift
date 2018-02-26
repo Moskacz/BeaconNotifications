@@ -15,5 +15,10 @@ extension UIViewController {
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
+    
+    func nextResponder(currentResponder: UIView) -> UIResponder? {
+        let nextResponderTag = currentResponder.tag + 1
+        return view.subviews.first { $0.tag == nextResponderTag }
+    }
 }
 

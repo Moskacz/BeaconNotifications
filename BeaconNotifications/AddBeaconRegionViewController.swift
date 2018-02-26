@@ -33,3 +33,18 @@ class AddBeaconRegionViewController: UIViewController {
         } 
     }
 }
+
+
+extension AddBeaconRegionViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == uuidField {
+            idField?.becomeFirstResponder()
+            return false
+        } else if textField == idField {
+            minorValueField?.becomeFirstResponder()
+            return false
+        }
+        
+        return true
+    }
+}
