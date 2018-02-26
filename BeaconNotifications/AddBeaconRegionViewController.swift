@@ -28,7 +28,7 @@ class AddBeaconRegionViewController: UIViewController {
             guard let validationError = error as? BeaconRegionValidationError else {
                 return
             }
-            print(validationError.localizedDescription)
+            presentAlert(title: "Error", message: validationError.localizedDescription)
         } 
     }
 }

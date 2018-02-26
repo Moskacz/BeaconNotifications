@@ -56,7 +56,7 @@ class AddBeaconRegionViewModel {
                       majorValidation.error,
                       minorValidation.error].flatMap { $0 }
         if !errors.isEmpty {
-            throw BeaconRegionValidationError.init(errors: errors)
+            throw BeaconRegionValidationError(errors: errors)
         }
         
         repository.addRegion(uuid: beaconValidtion.value!,
