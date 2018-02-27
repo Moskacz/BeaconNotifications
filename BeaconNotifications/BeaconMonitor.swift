@@ -50,6 +50,10 @@ class BeaconMonitorImpl: NSObject, BeaconMonitor {
 
 extension BeaconMonitorImpl: CLLocationManagerDelegate {
     
+    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
+        print(state)
+    }
+    
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         delegate?.beaconMonitorDidEnteredRegion(monitor: self)
     }
