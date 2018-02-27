@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D47" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="BeaconRegion" representedClassName=".BeaconRegion" syncable="YES">
         <attribute name="beaconId" attributeType="String" syncable="YES"/>
+        <attribute name="isMonitored" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="majorValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="minorValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
@@ -11,7 +12,7 @@
         <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
+        <element name="BeaconRegion" positionX="-63" positionY="0" width="128" height="120"/>
         <element name="Image" positionX="-63" positionY="-18" width="128" height="75"/>
-        <element name="BeaconRegion" positionX="-63" positionY="0" width="128" height="105"/>
     </elements>
 </model>
