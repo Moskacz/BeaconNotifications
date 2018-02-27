@@ -34,6 +34,7 @@ class BeaconMonitorImpl: NSObject, BeaconMonitor {
     
     func startMonitoringBeacon(uuid: UUID, identifier: String) {
         let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: identifier)
+        
         beaconRegion.notifyOnExit = true
         beaconRegion.notifyOnEntry = true
         beaconRegion.notifyEntryStateOnDisplay = true

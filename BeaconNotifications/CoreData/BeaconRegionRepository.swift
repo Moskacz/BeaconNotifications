@@ -41,4 +41,8 @@ class BeaconRegionRepository {
         beaconRegion.majorValue = major ?? -1
     }
     
+    var currentlyMonitoredRegion: BeaconRegion? {
+        return frc.fetchedObjects?.first { $0.isMonitored }
+    }
+    
 }
