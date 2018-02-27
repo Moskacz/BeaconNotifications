@@ -17,29 +17,12 @@ class BeaconMonitor: NSObject {
     private let notificationCenter: UNUserNotificationCenter
     private let beaconsFRC: NSFetchedResultsController<BeaconRegion>
     
-    
     init(manager: CLLocationManager,
          notificationCenter: UNUserNotificationCenter,
          beaconsRepository: BeaconRegionRepository) {
         self.manager = manager
         self.notificationCenter = notificationCenter
         self.beaconsFRC = beaconsRepository.frc
-    }
-    
-    private func startMonitoringBeacon(uuid: UUID,
-                               identifier: String,
-                               majorValue: CLBeaconMajorValue,
-                               minorValue: CLBeaconMajorValue) {
-        let region: CLBeaconRegion
-        if majorValue != -1, minorValue != -1 {
-            region = CLBeaconRegion(proximityUUID: uuid, major: majorValue, minor: minorValue, identifier: identifier)
-        } else {
-            region = CLBeaconRegion(proximityUUID: uuid, identifier: identifier)
-        }
-        
-        region.notifyOnExit = false
-        region.notifyOnEntry = true
-        scheduleNotificationFor(region: region)
     }
     
     private func scheduleNotificationFor(region: CLRegion) {
@@ -66,11 +49,24 @@ extension BeaconMonitor: NSFetchedResultsControllerDelegate {
                     at indexPath: IndexPath?,
                     for type: NSFetchedResultsChangeType,
                     newIndexPath: IndexPath?) {
-        guard let region = anObject as? BeaconRegion else { return }
-        if region.isMonitored {
-            
+        guard
+            let beaconRegion = anObject as? BeaconRegion,
+            let coreRegion = beaconRegion.coreLocationRegion else { return }
+        if beaconRegion.isMonitored {
+            scheduleNotificationFor(region: coreRegion)
         } else {
-            
+            notificationCenter.removePendingNotificationRequests(withIdentifiers: [coreRegion.identifier])
+        }
+    }
+}
+
+extension BeaconRegion {
+    var coreLocationRegion: CLBeaconRegion? {
+        guard let uuid = uuid, let identifier = beaconId else { return nil }
+        if minorValue > 0, majorValue > 0 {
+            return CLBeaconRegion(proximityUUID: uuid, major: UInt16(majorValue), minor: UInt16(minorValue), identifier: identifier)
+        } else {
+            return CLBeaconRegion(proximityUUID: uuid, identifier: identifier)
         }
     }
 }

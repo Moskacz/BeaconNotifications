@@ -37,7 +37,7 @@ class BeaconRegionRepository {
         let beaconRegion = BeaconRegion(context: stack.viewContext)
         beaconRegion.uuid = uuid
         beaconRegion.beaconId = identifier
-        beaconRegion.minorValue = minor ?? -1
-        beaconRegion.majorValue = major ?? -1
+        beaconRegion.minorValue = minor ?? 0
+        beaconRegion.majorValue = major ?? 0
     }
 }

@@ -51,19 +51,18 @@ extension BeaconListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId)!
         let region = frc!.object(at: indexPath)
-        cell.textLabel?.text = [region.beaconId, region.uuid?.uuidString].flatMap { $0 }.joined(separator: " ")
-        cell.textLabel?.numberOfLines = 1
-        cell.textLabel?.adjustsFontSizeToFitWidth = true
-        cell.textLabel?.minimumScaleFactor = 0.5
-        cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
-        cell.detailTextLabel?.minimumScaleFactor = 0.5
-        cell.detailTextLabel?.numberOfLines = 1
-        let detailsTextComponents = [("major", region.majorValue), ("minor", region.minorValue)]
+        fill(cell: cell, with: region)
+        return cell
+    }
+    
+    private func fill(cell: UITableViewCell, with beacon: BeaconRegion) {
+        cell.textLabel?.text = [beacon.beaconId, beacon.uuid?.uuidString].flatMap { $0 }.joined(separator: " ")
+        let detailsTextComponents = [("major", beacon.majorValue), ("minor", beacon.minorValue)]
         cell.detailTextLabel?.text = detailsTextComponents
-            .filter { $0.1 != -1 }
+            .filter { $0.1 > 0 }
             .map { return "\($0.0): \($0.1)"}
             .joined(separator: ", ")
-        return cell
+        cell.accessoryType = beacon.isMonitored ? .checkmark : .none
     }
 }
 

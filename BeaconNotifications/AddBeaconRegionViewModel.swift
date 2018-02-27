@@ -79,7 +79,7 @@ class AddBeaconRegionViewModel {
         guard let str = intString, !str.isEmpty else {
             return ValidationResult(value: nil, error: nil)
         }
-        guard let value = Int16(str) else {
+        guard let value = Int16(str), value > 0 else {
             return ValidationResult(value: nil, error: BeaconRegionFieldValidationError.invalidData(field: field))
         }
         return ValidationResult(value: value, error: nil)
