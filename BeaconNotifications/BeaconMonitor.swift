@@ -8,58 +8,69 @@
 
 import Foundation
 import CoreLocation
+import UserNotifications
+import CoreData
 
-protocol BeaconMonitorDelegate: class {
-    func beaconMonitorDidEnteredRegion(monitor: BeaconMonitor)
-    func beaconMonitorDidLeaveRegion(monitor: BeaconMonitor)
-}
-
-protocol BeaconMonitor: class {
-    var delegate: BeaconMonitorDelegate? { get set }
-    func startMonitoringBeacon(uuid: UUID, identifier: String)
-    func stopMonitoringCurrenlyMonitoredRegion()
-}
-
-class BeaconMonitorImpl: NSObject, BeaconMonitor {
+class BeaconMonitor: NSObject {
     
-    public weak var delegate: BeaconMonitorDelegate?
     private let manager: CLLocationManager
-    private var monitoredRegion: CLBeaconRegion?
+    private let notificationCenter: UNUserNotificationCenter
+    private let beaconsFRC: NSFetchedResultsController<BeaconRegion>
     
-    init(manager: CLLocationManager = CLLocationManager()) {
+    
+    init(manager: CLLocationManager,
+         notificationCenter: UNUserNotificationCenter,
+         beaconsRepository: BeaconRegionRepository) {
         self.manager = manager
-        super.init()
-        self.manager.delegate = self
+        self.notificationCenter = notificationCenter
+        self.beaconsFRC = beaconsRepository.frc
     }
     
-    func startMonitoringBeacon(uuid: UUID, identifier: String) {
-        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: identifier)
+    private func startMonitoringBeacon(uuid: UUID,
+                               identifier: String,
+                               majorValue: CLBeaconMajorValue,
+                               minorValue: CLBeaconMajorValue) {
+        let region: CLBeaconRegion
+        if majorValue != -1, minorValue != -1 {
+            region = CLBeaconRegion(proximityUUID: uuid, major: majorValue, minor: minorValue, identifier: identifier)
+        } else {
+            region = CLBeaconRegion(proximityUUID: uuid, identifier: identifier)
+        }
         
-        beaconRegion.notifyOnExit = true
-        beaconRegion.notifyOnEntry = true
-        beaconRegion.notifyEntryStateOnDisplay = true
-        manager.startMonitoring(for: beaconRegion)
-        self.monitoredRegion = beaconRegion
-        print("started monitoring")
+        region.notifyOnExit = false
+        region.notifyOnEntry = true
+        scheduleNotificationFor(region: region)
     }
     
-    func stopMonitoringCurrenlyMonitoredRegion() {
-        guard let region = monitoredRegion else { return }
-        manager.stopMonitoring(for: region)
+    private func scheduleNotificationFor(region: CLRegion) {
+        let content = UNMutableNotificationContent()
+        content.title = "test_title"
+        content.body = "test_body"
+        
+        let trigger = UNLocationNotificationTrigger(region: region, repeats: true)
+        let request = UNNotificationRequest(identifier: region.identifier,
+                                            content: content,
+                                            trigger: trigger)
+        notificationCenter.add(request) { (error) in
+            if let theError = error {
+                print(theError.localizedDescription)
+            }
+        }
     }
 }
 
-extension BeaconMonitorImpl: CLLocationManagerDelegate {
+extension BeaconMonitor: NSFetchedResultsControllerDelegate {
     
-    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
-        print(state)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        delegate?.beaconMonitorDidEnteredRegion(monitor: self)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        delegate?.beaconMonitorDidLeaveRegion(monitor: self)
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        guard let region = anObject as? BeaconRegion else { return }
+        if region.isMonitored {
+            
+        } else {
+            
+        }
     }
 }

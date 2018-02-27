@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import UserNotifications
+import CoreLocation
 
 class TabBarController: UITabBarController {
     
@@ -17,5 +19,17 @@ class TabBarController: UITabBarController {
     var beaconsViewController: BeaconListViewController {
         let navController = viewControllers![1] as! UINavigationController
         return navController.viewControllers[0] as! BeaconListViewController
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        UNUserNotificationCenter.current().requestAuthorization(options: .alert) { (status, error) in
+            if let authorizationError = error {
+                print(authorizationError.localizedDescription)
+            }
+        }
+        
+        CLLocationManager().requestWhenInUseAuthorization()
     }
 }
