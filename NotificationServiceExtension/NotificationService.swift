@@ -7,6 +7,7 @@
 //
 
 import UserNotifications
+import UIKit
 
 class NotificationService: UNNotificationServiceExtension {
 
@@ -17,18 +18,30 @@ class NotificationService: UNNotificationServiceExtension {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
-        if let bestAttemptContent = bestAttemptContent {
-            // Modify the notification content here...
-            bestAttemptContent.title = "\(bestAttemptContent.title) [modified]"
-            
-            contentHandler(bestAttemptContent)
+        if let content = bestAttemptContent {
+            fetchImage(completion: { [weak self] (image) in
+                content.userInfo[Constants.qrCodeImageContentKey] = image
+                self?.contentHandler?(content)
+            })
         }
     }
     
     override func serviceExtensionTimeWillExpire() {
-        if let contentHandler = contentHandler, let bestAttemptContent =  bestAttemptContent {
-            contentHandler(bestAttemptContent)
+        if let content = bestAttemptContent {
+            contentHandler?(content)
         }
+    }
+    
+    private func fetchImage(completion: @escaping ((UIImage?) -> Void)) {
+        var repository: ImageRepository?
+        let stack = CoreDataStack { [weak repository] (_, error) in
+            if error != nil {
+                completion(nil)
+                return
+            }
+            repository?.fetchImageAsync(completion: completion)
+        }
+        repository = ImageRepository(stack: stack)
     }
 
 }

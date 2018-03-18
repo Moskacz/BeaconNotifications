@@ -36,6 +36,10 @@ public class ImageRepository {
         imageEntity.imageData = (UIImagePNGRepresentation(image) as NSData?)
     }
     
+    public func fetchImageAsync(completion: ((UIImage?) -> Void)) {
+        
+    }
+    
     private var imageEntity: Image {
         if let existingEntity = frc.fetchedObjects?.first {
             return existingEntity
