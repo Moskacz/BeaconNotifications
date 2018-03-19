@@ -33,15 +33,16 @@ class NotificationService: UNNotificationServiceExtension {
     }
     
     private func fetchImage(completion: @escaping ((UIImage?) -> Void)) {
-        var repository: ImageRepository?
-        let stack = CoreDataStack { [weak repository] (_, error) in
-            if error != nil {
+        let stack = CoreDataStack()
+        let repository = ImageRepository(stack: stack)
+        stack.loadStores { [weak repository] (_, error) in
+            guard error == nil else {
                 completion(nil)
                 return
             }
+            
             repository?.fetchImageAsync(completion: completion)
         }
-        repository = ImageRepository(stack: stack)
     }
 
 }

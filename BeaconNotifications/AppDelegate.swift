@@ -14,9 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     private lazy var stack: CoreDataStack = {
-        return CoreDataStack(completion: { (desc, error) in
-            
-        })
+        let stackInternal = CoreDataStack()
+        stackInternal.loadStores(completion: { (_,_) in })
+        return stackInternal
     }()
     
     private lazy var imageRepository: ImageRepository = {
