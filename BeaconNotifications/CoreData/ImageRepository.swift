@@ -36,8 +36,15 @@ public class ImageRepository {
         imageEntity.imageData = (UIImagePNGRepresentation(image) as NSData?)
     }
     
-    public func fetchImageAsync(completion: ((UIImage?) -> Void)) {
-        
+    public func fetchImageAsync(completion: @escaping ((UIImage?) -> Void)) {
+        let fetchRequest = NSAsynchronousFetchRequest(fetchRequest: Image.fetchRequest()) { (result) in
+            completion(result.finalResult?.first?.image)
+        }
+        do {
+            try stack.viewContext.execute(fetchRequest)
+        } catch {
+            completion(nil)
+        }
     }
     
     private var imageEntity: Image {
