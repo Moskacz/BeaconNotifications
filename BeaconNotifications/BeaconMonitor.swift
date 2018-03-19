@@ -34,6 +34,7 @@ class BeaconMonitor: NSObject {
         let request = UNNotificationRequest(identifier: region.identifier,
                                             content: content,
                                             trigger: trigger)
+        
         notificationCenter.add(request) { (error) in
             if let theError = error {
                 print(theError.localizedDescription)
