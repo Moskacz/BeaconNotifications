@@ -23,6 +23,21 @@ class BeaconMonitor: NSObject {
         self.manager = manager
         self.notificationCenter = notificationCenter
         self.beaconsFRC = beaconsRepository.frc
+        super.init()
+        setupObservingForSavedBeacons()
+        self.beaconsFRC.delegate = self
+    }
+    
+    private func setupObservingForSavedBeacons() {
+        guard let beacons = beaconsFRC.fetchedObjects else { return }
+        let regions = beacons.flatMap { $0.coreLocationRegion }
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: regions.map { $0.identifier })
+        
+        for beacon in beacons where beacon.isMonitored {
+            if let region = beacon.coreLocationRegion {
+                scheduleNotificationFor(region: region)
+            }
+        }
     }
     
     private func scheduleNotificationFor(region: CLRegion) {
