@@ -43,5 +43,7 @@
 	</array>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>Beacon monitoring</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Beacon monitoring</string>
 </dict>
 </plist>

@@ -23,13 +23,28 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        UNUserNotificationCenter.current().requestAuthorization(options: .alert) { (status, error) in
-            if let authorizationError = error {
-                print(authorizationError.localizedDescription)
+        askForNotificationPermissionIfNeeded()
+    }
+    
+    private func askForNotificationPermissionIfNeeded() {
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.getNotificationSettings { [weak self] (settings) in
+            if settings.authorizationStatus == .notDetermined {
+                notificationCenter.requestAuthorization(options: [.alert, .sound], completionHandler: { (_, error) in
+                    if let authorizationError = error {
+                        print(authorizationError.localizedDescription)
+                    }
+                    self?.askForLocationPermissionIfNeeded()
+                })
+            } else {
+                self?.askForLocationPermissionIfNeeded()
             }
         }
-        
-        CLLocationManager().requestWhenInUseAuthorization()
+    }
+    
+    private func askForLocationPermissionIfNeeded() {
+        DispatchQueue.main.async {
+            CLLocationManager().requestAlwaysAuthorization()
+        }
     }
 }
