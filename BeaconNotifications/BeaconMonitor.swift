@@ -79,10 +79,20 @@ extension BeaconMonitor: NSFetchedResultsControllerDelegate {
 extension BeaconRegion {
     var coreLocationRegion: CLBeaconRegion? {
         guard let uuid = uuid, let identifier = beaconId else { return nil }
+        let region: CLBeaconRegion
         if minorValue > 0, majorValue > 0 {
-            return CLBeaconRegion(proximityUUID: uuid, major: UInt16(majorValue), minor: UInt16(minorValue), identifier: identifier)
+            region = CLBeaconRegion(proximityUUID: uuid,
+                                    major: UInt16(majorValue),
+                                    minor: UInt16(minorValue),
+                                    identifier: identifier)
         } else {
-            return CLBeaconRegion(proximityUUID: uuid, identifier: identifier)
+            region = CLBeaconRegion(proximityUUID: uuid,
+                                    identifier: identifier)
         }
+        
+        region.notifyEntryStateOnDisplay = true
+        region.notifyOnExit = false
+        region.notifyOnEntry = true
+        return region
     }
 }
