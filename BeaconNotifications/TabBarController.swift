@@ -29,6 +29,8 @@ class TabBarController: UITabBarController {
         return CLLocationManager()
     }()
     
+    private var monitor: BeaconMonitor?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         askForNotificationPermissionIfNeeded()
@@ -50,8 +52,30 @@ class TabBarController: UITabBarController {
     }
     
     private func askForLocationPermissionIfNeeded() {
+        guard CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined else {
+            initBeaconMonitor()
+            return
+        }
+        
         DispatchQueue.main.async { [weak self] in
+            self?.locationManager.delegate = self
             self?.locationManager.requestAlwaysAuthorization()
         }
+    }
+    
+    private func initBeaconMonitor() {
+        DispatchQueue.main.async {
+            guard let repository = self.beaconsViewController.repository else { return }
+            self.monitor = BeaconMonitor(manager: self.locationManager,
+                                         notificationCenter: self.notificationCenter,
+                                         beaconsRepository: repository)
+        }
+    }
+}
+
+extension TabBarController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        initBeaconMonitor()
     }
 }
