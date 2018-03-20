@@ -21,16 +21,23 @@ class TabBarController: UITabBarController {
         return navController.viewControllers[0] as! BeaconListViewController
     }
     
+    private lazy var notificationCenter: UNUserNotificationCenter = {
+        return UNUserNotificationCenter.current()
+    }()
+    
+    private lazy var locationManager: CLLocationManager = {
+        return CLLocationManager()
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         askForNotificationPermissionIfNeeded()
     }
     
     private func askForNotificationPermissionIfNeeded() {
-        let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.getNotificationSettings { [weak self] (settings) in
             if settings.authorizationStatus == .notDetermined {
-                notificationCenter.requestAuthorization(options: [.alert, .sound], completionHandler: { (_, error) in
+                self?.notificationCenter.requestAuthorization(options: [.alert, .sound], completionHandler: { (_, error) in
                     if let authorizationError = error {
                         print(authorizationError.localizedDescription)
                     }
@@ -43,8 +50,8 @@ class TabBarController: UITabBarController {
     }
     
     private func askForLocationPermissionIfNeeded() {
-        DispatchQueue.main.async {
-            CLLocationManager().requestAlwaysAuthorization()
+        DispatchQueue.main.async { [weak self] in
+            self?.locationManager.requestAlwaysAuthorization()
         }
     }
 }
