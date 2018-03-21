@@ -24,18 +24,35 @@ class BeaconMonitor: NSObject {
         self.notificationCenter = notificationCenter
         self.beaconsFRC = beaconsRepository.frc
         super.init()
+        configureNotificationCategories()
+        configureLocationManager()
         setupObservingForSavedBeacons()
         self.beaconsFRC.delegate = self
     }
     
+    private func configureNotificationCategories() {
+        let category = UNNotificationCategory(identifier: Constants.qrCodeNotificationCategory,
+                                              actions: [],
+                                              intentIdentifiers: [],
+                                              hiddenPreviewsBodyPlaceholder: "test",
+                                              options: .hiddenPreviewsShowTitle)
+        notificationCenter.setNotificationCategories(Set([category]))
+    }
+    
+    private func configureLocationManager() {
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.pausesLocationUpdatesAutomatically = false
+        manager.allowsBackgroundLocationUpdates = true
+        manager.startUpdatingLocation()
+    }
+    
     private func setupObservingForSavedBeacons() {
         guard let beacons = beaconsFRC.fetchedObjects else { return }
-        let regions = beacons.flatMap { $0.coreLocationRegion }
-        notificationCenter.removePendingNotificationRequests(withIdentifiers: regions.map { $0.identifier })
         
         for beacon in beacons where beacon.isMonitored {
             if let region = beacon.coreLocationRegion {
                 scheduleNotificationFor(region: region)
+                return
             }
         }
     }
@@ -44,12 +61,15 @@ class BeaconMonitor: NSObject {
         let content = UNMutableNotificationContent()
         content.title = "test_title"
         content.body = "test_body"
+        content.sound = UNNotificationSound.default()
         
         let trigger = UNLocationNotificationTrigger(region: region, repeats: true)
         let request = UNNotificationRequest(identifier: region.identifier,
                                             content: content,
                                             trigger: trigger)
         
+        
+        notificationCenter.removeAllPendingNotificationRequests()
         notificationCenter.add(request) { (error) in
             if let theError = error {
                 print(theError.localizedDescription)

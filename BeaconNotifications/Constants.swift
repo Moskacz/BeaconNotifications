@@ -12,4 +12,5 @@ class Constants {
     public static let appGroupIdentifier = "group.beacon.notifications"
     public static let showAddBeaconRegionVCSegueId = "ShowAddBeaconRegionViewController"
     public static let qrCodeImageContentKey = "qrCode"
+    public static let qrCodeNotificationCategory = "qrCodeNotification"
 }
